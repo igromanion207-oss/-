@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% from "_macros.html" import tag_list %}
+{% block title %}{{ project.title }} — {{ site_name }}{% endblock %}
+{% block description %}{{ project.summary }}{% endblock %}
+
+{% block content %}
+<article class="project-page">
+  <a class="back" href="{{ url_for('main.projects') }}">← Все проекты</a>
+  <h1>{{ project.title }}</h1>
+  <p class="lead">{{ project.summary }}</p>
+  {{ tag_list(project.stack) }}
+
+  {% if project.image %}
+    <img class="cover" src="{{ url_for('static', filename=project.image) }}" alt="{{ project.title }}">
+  {% endif %}
+
+  <div class="prose">{{ project.description_html | safe }}</div>
+
+  <p class="hero-actions">
+    {% if project.github %}<a class="btn" href="{{ project.github }}" target="_blank" rel="noopener">Код на GitHub</a>{% endif %}
+    {% if project.demo %}<a class="btn btn-outline" href="{{ project.demo }}" target="_blank" rel="noopener">Демо</a>{% endif %}
+  </p>
+</article>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% from "_macros.html" import project_card %}
+{% block title %}Проекты — {{ site_name }}{% endblock %}
+{% block description %}Проекты {{ site_name }}: боты, веб-приложения, автоматизация.{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <h1>Проекты</h1>
+  <p class="lead">Всё, что я сделал и чем горжусь.</p>
+</section>
+
+<div class="filters" role="group" aria-label="Фильтр по технологиям">
+  <button class="chip active" data-filter="*">Все</button>
+  {% for t in tags %}
+    <button class="chip" data-filter="{{ t }}">{{ t }}</button>
+  {% endfor %}
+</div>
+
+<div class="grid">
+  {% for p in projects %}{{ project_card(p) }}{% endfor %}
+</div>
+{% endblock %}

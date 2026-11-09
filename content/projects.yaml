@@ -1,0 +1,84 @@
+# ============================================================
+# Ваши проекты. Чтобы добавить новый — скопируйте блок и измените поля.
+#   slug     — часть адреса страницы (латиница, без пробелов): /projects/<slug>/
+#   featured — true, если проект нужно показать на главной
+#   image    — путь внутри app/static/
+#   description поддерживает Markdown
+# ============================================================
+
+- slug: weather-bot
+  title: Telegram-бот погоды
+  summary: Бот, который каждое утро присылает прогноз погоды для вашего города.
+  description: |
+    ## Задача
+    Хотелось получать прогноз без открытия приложений — прямо в Telegram.
+
+    ## Решение
+    - бот на **aiogram 3** с асинхронной обработкой сообщений;
+    - планировщик **APScheduler** отправляет прогноз по расписанию;
+    - данные берутся из OpenWeatherMap API и кэшируются, чтобы не тратить лимиты.
+
+    ```python
+    @router.message(Command("weather"))
+    async def weather(message: Message):
+        data = await api.get_forecast(city="Moscow")
+        await message.answer(format_forecast(data))
+    ```
+
+    ## Результат
+    Бот работает 24/7 в Docker-контейнере на VPS.
+  stack: [Python, aiogram, Docker, API]
+  image: img/weather-bot.svg
+  github: https://github.com/Xagan6_9/weather-bot
+  featured: true
+  date: 2025-09-01
+
+- slug: portfolio-site
+  title: Сайт-портфолио
+  summary: Этот сайт — Flask, Jinja2 и тема «золото на тёмно-синем».
+  description: |
+    Личный сайт, на котором вы сейчас находитесь.
+
+    - бэкенд на **Flask**, шаблоны **Jinja2**;
+    - проекты хранятся в YAML, статьи — в Markdown;
+    - собирается в статический HTML через **Frozen-Flask**;
+    - адаптивная вёрстка без CSS-фреймворков.
+  stack: [Python, Flask, HTML/CSS, JavaScript]
+  image: img/portfolio-site.svg
+  github: https://github.com/Xagan6_9/portfolio
+  featured: true
+  date: 2026-11-09
+
+- slug: file-sorter
+  title: Сортировщик файлов
+  summary: Скрипт, наводящий порядок в папке «Загрузки» за секунду.
+  description: |
+    Раскладывает файлы по папкам по типу: документы, картинки, архивы, видео.
+
+    | Расширение | Папка |
+    |---|---|
+    | .jpg .png | Images |
+    | .pdf .docx | Documents |
+    | .zip .rar | Archives |
+
+    Использует `pathlib` и `shutil`, умеет работать в режиме «только показать».
+  stack: [Python, Автоматизация]
+  image: img/file-sorter.svg
+  github: https://github.com/Xagan6_9/file-sorter
+  featured: true
+  date: 2025-04-12
+
+- slug: sales-dashboard
+  title: Дашборд продаж
+  summary: Интерактивная аналитика из CSV-файла за пару кликов.
+  description: |
+    Загружаете CSV — получаете графики выручки, топ товаров и динамику по месяцам.
+
+    - очистка данных в **pandas**;
+    - интерактивные графики **Plotly**;
+    - интерфейс на **Streamlit**.
+  stack: [Python, pandas, Plotly, Streamlit]
+  image: img/sales-dashboard.svg
+  github: https://github.com/Xagan6_9/sales-dashboard
+  featured: false
+  date: 2024-12-20

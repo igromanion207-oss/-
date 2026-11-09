@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site_name }} — {{ config.SITE_TAGLINE }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ config.SITE_DESCRIPTION }}{% endblock %}">
+  <meta name="theme-color" content="#0a1428">
+
+  <!-- Open Graph: превью ссылки в Telegram / VK / LinkedIn -->
+  <meta property="og:title" content="{{ self.title() }}">
+  <meta property="og:description" content="{{ self.description() }}">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pygments.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+      <a class="logo" href="{{ url_for('main.index') }}">{{ site_name }}</a>
+      <button class="burger" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        {% set ep = request.endpoint %}
+        <li><a href="{{ url_for('main.projects') }}" class="{{ 'active' if ep in ['main.projects', 'main.project'] }}">Проекты</a></li>
+        <li><a href="{{ url_for('main.blog') }}" class="{{ 'active' if ep in ['main.blog', 'main.post'] }}">Блог</a></li>
+        <li><a href="{{ url_for('main.about') }}" class="{{ 'active' if ep == 'main.about' }}">Обо мне</a></li>
+        <li><a href="{{ url_for('main.contact') }}" class="btn btn-small">Связаться</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="logo logo-small">{{ site_name }}</span>
+      <div class="social">
+        {% for name, link in social.items() %}
+          <a href="{{ link }}" target="_blank" rel="noopener">{{ name }}</a>
+        {% endfor %}
+      </div>
+      <p class="muted">© {{ current_year }} {{ site_name }}. Сделано на Python + Flask.</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

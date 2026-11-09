@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from "_macros.html" import project_card, post_item %}
+
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">Портфолио</p>
+  <h1 class="hero-title">
+    Привет, я <span class="gold-text">{{ site_name }}</span>
+  </h1>
+  <p class="lead">{{ config.SITE_TAGLINE }}. Пишу ботов, веб-приложения и автоматизирую рутину на Python.</p>
+  <div class="hero-actions">
+    <a class="btn" href="{{ url_for('main.projects') }}">Смотреть проекты</a>
+    <a class="btn btn-outline" href="{{ url_for('main.contact') }}">Написать мне</a>
+  </div>
+  <div class="hero-glow" aria-hidden="true"></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Избранные проекты</h2>
+    <a href="{{ url_for('main.projects') }}">Все проекты →</a>
+  </div>
+  <div class="grid">
+    {% for p in projects %}{{ project_card(p) }}{% endfor %}
+  </div>
+</section>
+
+{% if posts %}
+<section class="section">
+  <div class="section-head">
+    <h2>Последние записи</h2>
+    <a href="{{ url_for('main.blog') }}">Весь блог →</a>
+  </div>
+  <ul class="post-list">
+    {% for post in posts %}{{ post_item(post) }}{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Страница не найдена — {{ site_name }}{% endblock %}
+
+{% block content %}
+<section class="hero center">
+  <h1 class="hero-title gold-text">404</h1>
+  <p class="lead">Такой страницы нет. Возможно, её ещё не написали.</p>
+  <a class="btn" href="{{ url_for('main.index') }}">На главную</a>
+</section>
+{% endblock %}

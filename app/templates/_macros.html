@@ -1,0 +1,30 @@
+{% macro project_card(p) %}
+<article class="card reveal" data-tags="{{ p.stack | join('|') }}">
+  {% if p.image %}
+    <a class="card-img" href="{{ url_for('main.project', slug=p.slug) }}">
+      <img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.title }}" loading="lazy">
+    </a>
+  {% endif %}
+  <div class="card-body">
+    <h3><a href="{{ url_for('main.project', slug=p.slug) }}">{{ p.title }}</a></h3>
+    <p class="muted">{{ p.summary }}</p>
+    {{ tag_list(p.stack) }}
+  </div>
+</article>
+{% endmacro %}
+
+{% macro tag_list(tags) %}
+<ul class="tags">
+  {% for t in tags %}<li>{{ t }}</li>{% endfor %}
+</ul>
+{% endmacro %}
+
+{% macro post_item(post) %}
+<li class="post-item reveal">
+  <time datetime="{{ post.date }}">{{ post.date | ru_date }}</time>
+  <div>
+    <a href="{{ url_for('main.post', slug=post.slug) }}">{{ post.title }}</a>
+    {% if post.summary %}<p class="muted">{{ post.summary }}</p>{% endif %}
+  </div>
+</li>
+{% endmacro %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Обо мне — {{ site_name }}{% endblock %}
+
+{% block content %}
+<section class="page-head about">
+  <div class="avatar" aria-hidden="true">X</div>
+  <div>
+    <h1>Обо мне</h1>
+    <p class="lead">
+      Я — <span class="gold-text">{{ site_name }}</span>, Python-разработчик.
+      Люблю превращать идеи в работающие программы: от Telegram-ботов до веб-сервисов.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Навыки</h2>
+  <div class="skills">
+    {% for group, items in skills.items() %}
+      <div class="skill-card reveal">
+        <h3>{{ group }}</h3>
+        <ul class="tags">{% for s in items %}<li>{{ s }}</li>{% endfor %}</ul>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <h2>Путь</h2>
+  <ol class="timeline">
+    <li class="reveal"><span class="gold-text">Сейчас</span> — делаю собственные проекты и развиваю портфолио.</li>
+    <li class="reveal"><span class="gold-text">Раньше</span> — изучал Python, Git, базы данных и веб-разработку.</li>
+    <li class="reveal"><span class="gold-text">Начало</span> — написал первую программу и не смог остановиться.</li>
+  </ol>
+</section>
+{% endblock %}

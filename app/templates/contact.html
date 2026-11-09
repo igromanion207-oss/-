@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Контакты — {{ site_name }}{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <h1>Связаться</h1>
+  <p class="lead">Есть идея, проект или вопрос? Напишите — отвечу.</p>
+</section>
+
+<div class="contact-grid">
+  {% for name, link in social.items() %}
+    <a class="contact-card reveal" href="{{ link }}" target="_blank" rel="noopener">
+      <span class="contact-name">{{ name }}</span>
+      <span class="muted">{{ link.replace('mailto:', '').replace('https://', '') }}</span>
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}

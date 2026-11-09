@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "_macros.html" import post_item %}
+{% block title %}Блог — {{ site_name }}{% endblock %}
+{% block description %}Заметки {{ site_name }} о Python и разработке.{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <h1>Блог</h1>
+  <p class="lead">Заметки о коде, проектах и всём, чему я научился.</p>
+</section>
+
+{% if posts %}
+  <ul class="post-list">
+    {% for post in posts %}{{ post_item(post) }}{% endfor %}
+  </ul>
+{% else %}
+  <p class="muted">Пока записей нет — скоро появятся.</p>
+{% endif %}
+{% endblock %}

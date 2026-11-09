@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% from "_macros.html" import tag_list %}
+{% block title %}{{ post.title }} — {{ site_name }}{% endblock %}
+{% block description %}{{ post.summary }}{% endblock %}
+
+{% block content %}
+<article class="post-page">
+  <a class="back" href="{{ url_for('main.blog') }}">← Все записи</a>
+  <time class="muted" datetime="{{ post.date }}">{{ post.date | ru_date }}</time>
+  <h1>{{ post.title }}</h1>
+  {{ tag_list(post.tags) }}
+  <div class="prose">{{ post.html | safe }}</div>
+</article>
+{% endblock %}
